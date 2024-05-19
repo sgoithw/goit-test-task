@@ -1,0 +1,26 @@
+@font-face {
+  font-family: Inter;
+  src: local(Inter-Regular),
+    url(../public/fonts/Inter-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(Inter-Medium),
+    url(../public/fonts/Inter-Medium.ttf) format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(Inter-SemiBold),
+    url(../public/fonts/Inter-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}

@@ -1,0 +1,16 @@
+:root {
+  --button-red: #e44848;
+  --button-red-hover: #d84343;
+  --main-dark: #101828;
+  --inputs: #f7f7f7;
+  --block-features: #f2f4f7;
+  --rating: #ffc531;
+  --main-light-dark: #475467;
+  --main-light: #fff;
+  --divider-dark: rgba(16, 24, 40, 0.1);
+  --input-placehoder-dark: rgba(16, 24, 40, 0.6);
+
+  --font-main: 'Inter', sans-serif;
+
+  --default-transition: 0.2s linear;
+}
