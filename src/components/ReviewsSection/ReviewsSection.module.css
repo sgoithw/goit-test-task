@@ -1,0 +1,15 @@
+.reviews-section {
+  margin-top: 36px;
+}
+
+.reviews-section .reviews-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+.reviews-catalog-btn {
+  margin: 36px auto;
+}

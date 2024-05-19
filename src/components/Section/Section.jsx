@@ -7,6 +7,7 @@ const Section = ({
   id,
   className,
   outOfContainer = false,
+  containerClassName = '',
 }) => (
   <section id={id} className={className}>
     {outOfContainer && (
@@ -16,7 +17,7 @@ const Section = ({
       </>
     )}
     {!outOfContainer && (
-      <Container>
+      <Container className={containerClassName}>
         {title && <h2 className={styles['section-title']}>{title}</h2>}
         {children}
       </Container>

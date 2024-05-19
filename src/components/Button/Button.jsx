@@ -1,7 +1,13 @@
 import style from './Button.module.css';
 import clsx from 'clsx';
 
-const Button = ({ children, className, outline = false }) => {
+const Button = ({
+  children,
+  id,
+  className,
+  outline = false,
+  type = 'button',
+}) => {
   return (
     <button
       className={clsx({
@@ -10,6 +16,8 @@ const Button = ({ children, className, outline = false }) => {
         [style['outline-button']]: outline,
         [className]: className,
       })}
+      type={type}
+      id={id}
     >
       {children}
     </button>

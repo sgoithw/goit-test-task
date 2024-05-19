@@ -1,0 +1,144 @@
+.filter-fieldset {
+  margin-bottom: 26px;
+}
+.filter-label {
+  height: 24px;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: rgba(16, 24, 40, 0.6);
+  margin-bottom: 8px;
+  display: block;
+}
+.filter-input {
+  width: 360px;
+  flex-grow: 0;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: var(--inputs);
+  border: none;
+  box-sizing: border-box;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--main);
+}
+.location-fieldset {
+  margin-bottom: 32px;
+}
+.filter-legend {
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--main-light-dark);
+  margin-bottom: 14px;
+}
+.filter-fieldset-legend {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--main-dark);
+}
+.filter-fieldset-legend + hr {
+  height: 1px;
+  background-color: var(--divider-dark);
+  margin: 24px 0;
+  box-shadow: none;
+  border: none;
+}
+.filter-fieldset-legend.small-legend {
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--main-dark);
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.filter-list-item {
+  width: calc((100% - 8px * 2) / 3);
+  cursor: pointer;
+}
+
+.filter-checkbox-big {
+  width: 100%;
+  height: 95px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  mix-blend-mode: multiply;
+  border-radius: 10px;
+  border: solid 1px rgba(16, 24, 40, 0.2);
+  align-content: center;
+  align-items: center;
+}
+
+.filter-checkbox-title {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--main-dark);
+}
+
+.filter-checkbox-big input[type='checkbox'],
+.filter-checkbox-big input[type='radio'] {
+  display: none;
+}
+
+.form-search-button {
+  width: 173px;
+  margin-top: 64px;
+}
+
+.filter-input-wraper {
+  position: relative;
+}
+
+.filter-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 18px;
+}
+
+.filter-input-icon + input {
+  padding-left: 44px;
+}

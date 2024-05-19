@@ -1,0 +1,14 @@
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+.reviews-list-horisontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
