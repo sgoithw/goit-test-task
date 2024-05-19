@@ -1,243 +1,22 @@
+import Header from 'components/Header/Header';
 import './App.css';
+import Footer from 'components/Footer/Footer';
+import HeroSection from 'components/HeroSection/HeroSection';
+import OurFeaturesSection from 'components/OurFeturesSection/OurFeaturesSection';
+import GallerySection from 'components/GallerySection/GallerySection';
 
 function App() {
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <nav className="header-nav">
-            <a className="header-logo" href="#home">
-              <img
-                width={50}
-                height={50}
-                src={process.env.PUBLIC_URL + '/logo192.png'}
-                alt="Campers"
-              />
-            </a>
-            <ul className="header-nav-list">
-              <li className="header-nav-list-item">
-                <a className="nav-link" href="#home">
-                  Home
-                </a>
-              </li>
-              <li className="header-nav-list-item">
-                <a className="nav-link" href="#catalog">
-                  Catalog
-                </a>
-              </li>
-              <li className="header-nav-list-item">
-                <a className="nav-link" href="#favorites">
-                  Favorites
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
+      <Header />
       <main className="main">
-        <section
-          id="hero"
-          className="hero-section"
-          style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL + '/hero-bg.webp'})`,
-          }}
-        >
-          <div className="container">
-            <div className="hero-content">
-              <h1 className="hero-title">
-                Rent a camper <br /> hit the road!
-              </h1>
-              <p className="hero-sub-title">
-                Choose the perfect camper for your next adventure from the
-                largest selection of campervans in the world.
-              </p>
-              <a href="#catalog" className="button main-button">
-                View catalog
-              </a>
-            </div>
-          </div>
-        </section>
-        <section className="our-features">
-          <div className="container">
-            <h2 className="section-title">Our features</h2>
-            <ul className="features-list">
-              <li className="features-list-item">
-                <svg width="64" height="64">
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#van'}></use>
-                </svg>
-                <h3 className="features-list-item-title">Wide choice</h3>
-                <p className="features-list-item-text">
-                  Choose from over 1000 campervans
-                </p>
-              </li>
-              <li className="features-list-item">
-                <svg width="64" height="64">
-                  <use
-                    href={process.env.PUBLIC_URL + '/icons.svg#map-pin'}
-                  ></use>
-                </svg>
-                <h3 className="features-list-item-title">Location</h3>
-                <p className="features-list-item-text">
-                  Convenient locations in 105 countries
-                </p>
-              </li>
-              <li className="features-list-item">
-                <svg width="64" height="64">
-                  <use
-                    href={process.env.PUBLIC_URL + '/icons.svg#rateing'}
-                  ></use>
-                </svg>
-                <h3 className="features-list-item-title">Safety</h3>
-                <p className="features-list-item-text">
-                  Your safety is our top priority
-                </p>
-              </li>
-              <li className="features-list-item">
-                <svg width="64" height="64">
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#users'}></use>
-                </svg>
-                <h3 className="features-list-item-title">Support</h3>
-                <p className="features-list-item-text">24/7 customer support</p>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section id="gallery" className="gallery-section">
-          <h2 className="section-title">Create unforgateble memories</h2>
-          <ul className="gallery-list">
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-1.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-2.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-3.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-4.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-5.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-6.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-7.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-8.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-9.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-10.webp'}
-                alt="camper"
-              />
-            </li>
-
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-11.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-12.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-13.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-14.webp'}
-                alt="camper"
-              />
-            </li>
-            <li className="gallery-list-item">
-              <img
-                src={process.env.PUBLIC_URL + '/images/gallery/img-15.webp'}
-                alt="camper"
-              />
-            </li>
-          </ul>
-        </section>
+        <HeroSection />
+        <OurFeaturesSection />
+        <GallerySection />
         <section id="reviews" className="reviews-section">
           <div className="container">
             <h2 className="section-title">What our customers say</h2>
             <ul class="reviews-list">
-              <li class="reviews-list-item">
-                <div class="reviews-user-info">
-                  <span class="reviews-user-fl">J</span>
-                  <div class="reviews-user-rate-holder">
-                    <span class="reviews-user-name">John Doe</span>
-                    <ul class="reviews-rate-list">
-                      <li class="reviews-rate-list-item">
-                        <svg width="16" height="16">
-                          <use href="/goit-test-task/icons.svg#rateing"></use>
-                        </svg>
-                      </li>
-                      <li class="reviews-rate-list-item">
-                        <svg width="16" height="16">
-                          <use href="/goit-test-task/icons.svg#rateing"></use>
-                        </svg>
-                      </li>
-                      <li class="reviews-rate-list-item">
-                        <svg width="16" height="16">
-                          <use href="/goit-test-task/icons.svg#rateing"></use>
-                        </svg>
-                      </li>
-                      <li class="reviews-rate-list-item">
-                        <svg width="16" height="16">
-                          <use href="/goit-test-task/icons.svg#rateing"></use>
-                        </svg>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <p class="reviews-list-item-text">
-                  The Mavericks panel truck is a great choice for those who
-                  value simplicity and functionality. It has everything you need
-                  for a comfortable journey.
-                </p>
-              </li>
               <li class="reviews-list-item">
                 <div class="reviews-user-info">
                   <span class="reviews-user-fl">J</span>
@@ -1584,7 +1363,7 @@ function App() {
           </div>
         </div>
       </main>
-      <footer className="footer">All rights reserved © 2024</footer>
+      <Footer />
     </>
   );
 }
