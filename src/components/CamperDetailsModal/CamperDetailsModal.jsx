@@ -9,7 +9,7 @@ import {
   selectIsDetailsModalOpen,
 } from './../../redux/selectors';
 import { closeDetailsModal } from './../../redux/detailsModalSlice';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CamperFeature from 'components/CamperFeature/CamperFeature';
 
 const CamperDetailsModal = () => {
@@ -19,18 +19,17 @@ const CamperDetailsModal = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('features');
 
-  const handleEsc = useCallback(e => {
-    if (e.key === 'Escape') {
-      handleClose();
-    }
-  });
-
   useEffect(() => {
+    const handleEsc = e => {
+      if (e.key === 'Escape') {
+        dispatch(closeDetailsModal());
+      }
+    };
     document.addEventListener('keydown', handleEsc);
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
-  }, [handleEsc]);
+  }, [dispatch]);
 
   useEffect(() => {
     setActiveTab('features');
