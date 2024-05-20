@@ -30,7 +30,7 @@ const CamperDetailsModal = () => {
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setActiveTab('features');

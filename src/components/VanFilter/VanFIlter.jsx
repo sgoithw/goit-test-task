@@ -5,7 +5,7 @@ import FilterListBigCheckboxItem from 'components/FilterListBigCheckboxItem/Filt
 import FilterListRadioButtonsList from 'components/FilterListRadioButtonsList/FilterListRadioButtonsList';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setFilter } from './../../redux/filterSlice';
+import { setFilter } from '../../redux/filterSlice';
 
 const VanFilter = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const VanFilter = () => {
             setDetails(det);
           }
         } else {
-          setDetails(det.filter(e => e != value));
+          setDetails(det.filter(e => e !== value));
         }
         break;
       case 'transmission':

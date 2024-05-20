@@ -1,6 +1,6 @@
 import Section from 'components/Section/Section';
 import style from './Catalog.module.css';
-import VanFilter from 'components/VanFilter/VanFIlter';
+import VanFilter from 'components/VanFilter/VanFilter';
 import CampersList from 'components/CampersList/CampersList';
 import Button from 'components/Button/Button';
 import CamperDetailsModal from 'components/CamperDetailsModal/CamperDetailsModal';

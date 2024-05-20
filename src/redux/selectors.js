@@ -41,7 +41,7 @@ export const selectFilteredAds = createSelector(
     }
 
     if (vanType.length > 0) {
-      filteredAds = filteredAds.filter(ad => ad.form == vanType);
+      filteredAds = filteredAds.filter(ad => ad.form === vanType);
     }
 
     if (details.length > 0) {
@@ -59,7 +59,7 @@ export const selectFilteredAds = createSelector(
     }
 
     if (transmission.length > 0) {
-      filteredAds = filteredAds.filter(ad => ad.transmission == transmission);
+      filteredAds = filteredAds.filter(ad => ad.transmission === transmission);
     }
 
     return filteredAds;
