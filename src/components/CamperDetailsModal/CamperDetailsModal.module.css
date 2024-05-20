@@ -15,7 +15,9 @@
   width: 982px;
   margin: 40px auto;
 }
-
+.modal-close {
+  cursor: pointer;
+}
 .modal-camper-header {
   margin-bottom: 24px;
 }
@@ -161,6 +163,12 @@
   flex-shrink: 0;
 }
 .modal-tab-content {
+  display: none;
+}
+.modal-tab-content {
+  &.active {
+    display: block;
+  }
 }
 .modal-camper-feature-list {
   margin-bottom: 44px;
@@ -228,6 +236,7 @@
   padding: 24px;
   border-radius: 10px;
   border: solid 1px var(--divider-dark);
+  height: max-content;
 }
 .modal-title {
   font-size: 20px;

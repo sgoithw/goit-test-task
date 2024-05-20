@@ -7,9 +7,11 @@ const Button = ({
   className,
   outline = false,
   type = 'button',
+  onClick,
 }) => {
   return (
     <button
+      onClick={onClick}
       className={clsx({
         [style['button']]: true,
         [style['main-button']]: !outline,

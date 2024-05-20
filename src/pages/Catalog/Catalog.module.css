@@ -1,0 +1,14 @@
+.catalog-section-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: flex-start;
+  gap: 64px;
+}
+.catalog {
+  .load-more {
+    margin: 24px auto;
+  }
+}

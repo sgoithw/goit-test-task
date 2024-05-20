@@ -1,41 +1,28 @@
-import Header from 'components/Header/Header';
-import './App.css';
-import Footer from 'components/Footer/Footer';
-import HeroSection from 'components/HeroSection/HeroSection';
-import OurFeaturesSection from 'components/OurFeturesSection/OurFeaturesSection';
-import GallerySection from 'components/GallerySection/GallerySection';
-import ReviewsSection from 'components/ReviewsSection/ReviewsSection';
-import SupportSection from 'components/SupportSection/SupportSection';
-import VanFilter from 'components/VanFilter/VanFIlter';
-import CampersList from 'components/CampersList/CampersList';
-import Button from 'components/Button/Button';
-import CamperDetailsModal from 'components/CamperDetailsModal/CamperDetailsModal';
+import { lazy, useEffect } from 'react';
+
+import SharedLayout from 'layout/SharedLayout/SharedLayout';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchAdverts } from './redux/operations';
+
+const Home = lazy(() => import('pages/Home/Home.jsx'));
+const Favorites = lazy(() => import('pages/Favorites/Faovrites.jsx'));
+const Catalog = lazy(() => import('pages/Catalog/Catalog.jsx'));
 
 function App() {
+  const dipatch = useDispatch();
+  useEffect(() => {
+    dipatch(fetchAdverts());
+  }, []);
+
   return (
-    <>
-      <Header />
-      <main className="main">
-        <HeroSection />
-        <OurFeaturesSection />
-        <GallerySection />
-        <ReviewsSection />
-        <SupportSection />
-        <section id="catalog" className="catalog-section">
-          <div className="container">
-            <div className="sidebar">
-              <VanFilter />
-            </div>
-            <div className="catalog">
-              <CampersList />
-              <Button id="load-more"> Load more</Button>
-            </div>
-          </div>
-        </section>
-        <CamperDetailsModal />
-      </main>
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route element={<Home />} index />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Route>
+    </Routes>
   );
 }
 

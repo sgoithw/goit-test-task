@@ -1,9 +1,9 @@
-import styles from './OurFeaturesSection.module.css';
+import styles from './OurFeturesSection.module.css';
 
 import FeaturesList from 'components/FeaturesList/FeaturesList';
 import Section from '../Section/Section';
 
-const OurFeatureSection = () => {
+const OurFeturesSection = () => {
   return (
     <Section
       id="our-features"
@@ -15,4 +15,4 @@ const OurFeatureSection = () => {
   );
 };
 
-export default OurFeatureSection;
+export default OurFeturesSection;

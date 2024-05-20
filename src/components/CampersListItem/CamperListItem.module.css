@@ -71,6 +71,7 @@
 }
 
 .camper-add-favorites {
+  cursor: pointer;
 }
 
 .camper-sub-header {

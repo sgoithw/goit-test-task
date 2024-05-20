@@ -2,16 +2,43 @@ import clsx from 'clsx';
 import style from './CamperDetailsModal.module.css';
 import ReviewsList from 'components/ReviewsList/ReviewsList';
 import BookCamperForm from 'components/BookCamperForm/BookCamperForm';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAdvertById,
+  selectDetailsModalId,
+  selectIsDetailsModalOpen,
+} from './../../redux/selectors';
+import { closeDetailsModal } from './../../redux/detailsModalSlice';
+import { useState } from 'react';
 
 const CamperDetailsModal = () => {
+  const isOpen = useSelector(selectIsDetailsModalOpen);
+  const id = useSelector(selectDetailsModalId);
+  const ad = useSelector(selectAdvertById(id));
+  const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState('features');
+
+  const handleClose = () => {
+    dispatch(closeDetailsModal());
+  };
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    <div className={style['modal-holder']} style={{ display: 'none' }}>
+    <div className={style['modal-holder']}>
       <div className={style['modal']}>
         <div className={style['modal-camper-header']}>
           <div className={style['modal-camper-header-top']}>
-            <h2 className={style['modal-camper-title']}>Mavericks</h2>
+            <h2 className={style['modal-camper-title']}>{ad.name}</h2>
             <div className={style['modal-camper-head-actions']}>
-              <svg width="32" height="32" className={style['modal-close']}>
+              <svg
+                onClick={handleClose}
+                width="32"
+                height="32"
+                className={style['modal-close']}
+              >
                 <use href={process.env.PUBLIC_URL + '/icons.svg#close'}></use>
               </svg>
             </div>
@@ -21,127 +48,78 @@ const CamperDetailsModal = () => {
               <svg width="16" height="16">
                 <use href={process.env.PUBLIC_URL + '/icons.svg#rateing'}></use>
               </svg>
-              <span className={'text-underline'}>4.2(10 Reviews)</span>
+              <span className={'text-underline'}>
+                {ad.rating}({ad.reviews.length} Reviews)
+              </span>
             </span>
             <span className={style['modal-camper-sub-header-badge']}>
               <svg width="16" height="16">
                 <use href={process.env.PUBLIC_URL + '/icons.svg#map-pin'}></use>
               </svg>
-              Kyiv, Ukraine
+              {ad.location}
             </span>
           </div>
-          <span className={style['camper-price']}>€8000.00</span>
+          <span className={style['camper-price']}>€{ad.price.toFixed(2)}</span>
         </div>
         <div className={style['modal-camper-gallery']}>
           <ul className={style['modal-camper-gallery-list']}>
-            <li className={style['modal-camper-gallery-item']}>
-              <img
-                className={style['modal-camper-gallery-img']}
-                src="https://ftp.goit.study/img/campers-test-task/1-1.webp"
-                alt="Mavericks camper"
-              />
-            </li>
-            <li className={style['modal-camper-gallery-item']}>
-              <img
-                className={style['modal-camper-gallery-img']}
-                src="https://ftp.goit.study/img/campers-test-task/1-2.webp"
-                alt="Mavericks camper"
-              />
-            </li>
-            <li className={style['modal-camper-gallery-item']}>
-              <img
-                className={style['modal-camper-gallery-img']}
-                src="https://ftp.goit.study/img/campers-test-task/1-3.webp"
-                alt="Mavericks camper"
-              />
-            </li>
+            {ad.gallery.slice(0, 3).map(image => (
+              <li className={style['modal-camper-gallery-item']}>
+                <img
+                  className={style['modal-camper-gallery-img']}
+                  src={image}
+                  alt={ad.name}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         <div className={style['modal-camper-description']}>
-          <p>
-            Embrace simplicity and freedom with the Mavericks panel truck, an
-            ideal choice for solo travelers or couples seeking a compact and
-            efficient way to explore the open roads. This no-frills yet reliable
-            panel truck offers the essentials for a comfortable journey, making
-            it the perfect companion for those who value simplicity and
-            functionality.
-          </p>
+          <p>{ad.description}</p>
         </div>
         <ul className={style['modal-tabs-list']}>
-          <li className={clsx(style['modal-tab-nav'], style['active'])}>
+          <li
+            className={clsx(
+              style['modal-tab-nav'],
+              activeTab == 'features' && style['active']
+            )}
+            onClick={() => setActiveTab('features')}
+          >
             Features
           </li>
-          <li className={style['modal-tab-nav']}>Reviews</li>
+          <li
+            className={clsx(
+              style['modal-tab-nav'],
+              activeTab == 'reviews' && style['active']
+            )}
+            onClick={() => setActiveTab('reviews')}
+          >
+            Reviews
+          </li>
         </ul>
         <div className={style['modal-details']}>
           <div className={style['modal-tabs']}>
             <div
               id="features"
-              style={{ display: 'none' }}
-              className={style['modal-tab-content']}
+              className={clsx(
+                style['modal-tab-content'],
+                activeTab == 'features' && style['active']
+              )}
             >
               <ul className={style['modal-camper-feature-list']}>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#users"></use>
-                  </svg>
-                  2 adults
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#multiroute"></use>
-                  </svg>
-                  Automatic
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#gass"></use>
-                  </svg>
-                  Petrol
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#fork-knife"></use>
-                  </svg>
-                  Kitchen
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#bed"></use>
-                  </svg>
-                  1 bed
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#wind"></use>
-                  </svg>
-                  AC
-                </li>
-
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#gass"></use>
-                  </svg>
-                  Petrol
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#fork-knife"></use>
-                  </svg>
-                  Kitchen
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#bed"></use>
-                  </svg>
-                  1 bed
-                </li>
-                <li className={style['camper-feture-item']}>
-                  <svg width="20" height="20">
-                    <use href="/goit-test-task/icons.svg#wind"></use>
-                  </svg>
-                  AC
-                </li>
+                {Object.keys(ad.details).map(key => (
+                  <li className={style['camper-feture-item']}>
+                    <svg width="20" height="20">
+                      <use
+                        href={
+                          process.env.PUBLIC_URL +
+                          `/icons.svg#${key.toLowerCase()}`
+                        }
+                      ></use>
+                    </svg>
+                    {ad.details[key]} {key}
+                  </li>
+                ))}
               </ul>
               <div className={style['camper-vehicle-details']}>
                 <h3 className={style['camper-vehicle-details-title']}>
@@ -157,7 +135,7 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      Panel truck
+                      {ad.form}
                     </span>
                   </li>
                   <li className={style['camper-vehicle-details-item']}>
@@ -169,7 +147,7 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      5.4 m
+                      {ad.length}
                     </span>
                   </li>
                   <li className={style['camper-vehicle-details-item']}>
@@ -181,7 +159,7 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      2.01 m
+                      {ad.width}
                     </span>
                   </li>
                   <li className={style['camper-vehicle-details-item']}>
@@ -193,7 +171,7 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      2.05 m
+                      {ad.height}
                     </span>
                   </li>
                   <li className={style['camper-vehicle-details-item']}>
@@ -205,7 +183,7 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      132 I
+                      {ad.tank}
                     </span>
                   </li>
                   <li className={style['camper-vehicle-details-item']}>
@@ -217,14 +195,20 @@ const CamperDetailsModal = () => {
                     <span
                       className={style['camper-vehicle-details-item-value']}
                     >
-                      12.4l/100km
+                      {ad.consumption}
                     </span>
                   </li>
                 </ul>
               </div>
             </div>
-            <div id="reviews" className={style['modal-tab-content']}>
-              <ReviewsList />
+            <div
+              id="reviews"
+              className={clsx(
+                style['modal-tab-content'],
+                activeTab == 'reviews' && style['active']
+              )}
+            >
+              <ReviewsList reviews={ad.reviews} />
             </div>
           </div>
           <div className={style['modal-book-form-container']}>

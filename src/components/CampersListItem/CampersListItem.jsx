@@ -1,26 +1,60 @@
 import Button from 'components/Button/Button';
 import style from './CamperListItem.module.css';
+import { selectIsFavorite } from './../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from './../../redux/favoritesSlice';
+import { showDetailsModal } from './../../redux/detailsModalSlice';
 
-const CampersListItem = camper => {
+const CampersListItem = ({
+  _id,
+  name,
+  price,
+  rating,
+  reviews,
+  location,
+  description,
+  gallery,
+  details,
+}) => {
+  const dispatch = useDispatch();
+  const previewImage =
+    gallery[0] ?? 'https://ftp.goit.study/img/campers-test-task/1-1.webp';
+  const isFavorite = useSelector(selectIsFavorite(_id));
+
+  const handleFavoriteClick = () => {
+    isFavorite ? dispatch(removeFavorite(_id)) : dispatch(addFavorite(_id));
+  };
+
+  const handleShowDetails = () => {
+    dispatch(showDetailsModal(_id));
+  };
+
   return (
     <li className={style['camper']}>
       <img
         className={style['camper-image']}
-        src="https://ftp.goit.study/img/campers-test-task/1-1.webp"
+        src={previewImage}
         alt="Mavericks camper"
       />
       <div className={style['camper-details']}>
         <div className={style['camper-header']}>
           <div className={style['camper-header-top']}>
-            <h2 className={style['camper-title']}>Mavericks</h2>
+            <h2 className={style['camper-title']}>{name}</h2>
             <div className={style['camper-head-actions']}>
-              <span className={style['camper-price']}>€8000.00</span>
+              <span className={style['camper-price']}>€{price.toFixed(2)}</span>
               <svg
+                onClick={handleFavoriteClick}
                 width="24"
                 height="24"
                 className={style['camper-add-favorites']}
               >
-                <use href={process.env.PUBLIC_URL + '/icons.svg#heart'}></use>
+                <use
+                  href={
+                    process.env.PUBLIC_URL +
+                    '/icons.svg#' +
+                    (isFavorite ? 'heart-filled' : 'heart')
+                  }
+                ></use>
               </svg>
             </div>
           </div>
@@ -29,64 +63,38 @@ const CampersListItem = camper => {
               <svg width="16" height="16">
                 <use href={process.env.PUBLIC_URL + '/icons.svg#rateing'}></use>
               </svg>
-              <span className={style['text-underline']}>4.2(10 Reviews)</span>
+              <span className={style['text-underline']}>
+                {rating}({reviews.length} Reviews)
+              </span>
             </span>
             <span className={style['camper-sub-header-badge']}>
               <svg width="16" height="16">
                 <use href={process.env.PUBLIC_URL + '/icons.svg#map-pin'}></use>
               </svg>
-              Kyiv, Ukraine
+              {location}
             </span>
           </div>
         </div>
         <div className={style['camper-description']}>
-          <p>
-            Embrace simplicity and freedom with the Mavericks panel truck, an...
-          </p>
+          <p>{description}</p>
         </div>
         <ul className={style['camper-feature-list']}>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use href={process.env.PUBLIC_URL + '/icons.svg#users'}></use>
-            </svg>
-            2 adults
-          </li>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use
-                href={process.env.PUBLIC_URL + '/icons.svg#multiroute'}
-              ></use>
-            </svg>
-            Automatic
-          </li>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use href={process.env.PUBLIC_URL + '/icons.svg#gass'}></use>
-            </svg>
-            Petrol
-          </li>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use
-                href={process.env.PUBLIC_URL + '/icons.svg#fork-knife'}
-              ></use>
-            </svg>
-            Kitchen
-          </li>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use href={process.env.PUBLIC_URL + '/icons.svg#bed'}></use>
-            </svg>
-            1 bed
-          </li>
-          <li className={style['camper-feture-item']}>
-            <svg width="20" height="20">
-              <use href={process.env.PUBLIC_URL + '/icons.svg#wind'}></use>
-            </svg>
-            AC
-          </li>
+          {Object.keys(details).map(key => (
+            <li key={key} className={style['camper-feture-item']}>
+              <svg width="20" height="20">
+                <use
+                  href={
+                    process.env.PUBLIC_URL + `/icons.svg#${key.toLowerCase()}`
+                  }
+                ></use>
+              </svg>
+              {details[key]} {key}
+            </li>
+          ))}
         </ul>
-        <Button className="camper-show-more">Show more</Button>
+        <Button className="camper-show-more" onClick={handleShowDetails}>
+          Show more
+        </Button>
       </div>
     </li>
   );
