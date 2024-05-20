@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgoit_test_task=self.webpackChunkgoit_test_task||[]).push([[0],{790:(s,e,t)=>{t.r(e),t.d(e,{default:()=>l});var a=t(898),i=t(850),c=t(743),r=t(579);const l=()=>(0,r.jsxs)(r.Fragment,{children:[(0,r.jsx)(a.A,{id:"favorites",className:"favorites-section",children:(0,r.jsx)("div",{className:"catalog",children:(0,r.jsx)(i.A,{favorites:!0})})}),(0,r.jsx)(c.A,{})]})}}]);
+//# sourceMappingURL=0.527aa06b.chunk.js.map
