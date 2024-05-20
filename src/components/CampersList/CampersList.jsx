@@ -22,7 +22,7 @@ const CampersList = ({ favorites = false }) => {
       {renderAds.map(ad => (
         <CampersListItem key={ad._id} {...ad} />
       ))}
-      {renderAds.length === 0 && <p>No campers found</p>}
+      {!isLoading && renderAds.length === 0 && <p>No campers found</p>}
     </ul>
   );
 };
