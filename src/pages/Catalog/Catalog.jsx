@@ -1,6 +1,6 @@
 import Section from 'components/Section/Section';
 import style from './Catalog.module.css';
-import VanFilter from 'components/VanFilter/VanFilter';
+import VanFilters from 'components/VanFilters/VanFilters';
 import CampersList from 'components/CampersList/CampersList';
 import Button from 'components/Button/Button';
 import CamperDetailsModal from 'components/CamperDetailsModal/CamperDetailsModal';
@@ -27,7 +27,7 @@ const Catalog = () => {
         containerClassName={style['catalog-section-container']}
       >
         <div className="sidebar">
-          <VanFilter />
+          <VanFilters />
         </div>
         <div className={style['catalog']}>
           <CampersList />

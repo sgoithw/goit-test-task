@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import style from './VanFilter.module.css';
+import style from './VanFilters.module.css';
 import Button from 'components/Button/Button';
 import FilterListBigCheckboxItem from 'components/FilterListBigCheckboxItem/FilterListBigCheckboxItem';
 import FilterListRadioButtonsList from 'components/FilterListRadioButtonsList/FilterListRadioButtonsList';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/filterSlice';
 
-const VanFilter = () => {
+const VanFilters = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState('');
   const [details, setDetails] = useState([]);
@@ -44,12 +44,6 @@ const VanFilter = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log({
-      location,
-      details,
-      transmission,
-      vanType,
-    });
     dispatch(
       setFilter({
         location,
@@ -65,7 +59,7 @@ const VanFilter = () => {
       <fieldset
         className={clsx(style['filter-fieldset'], style['location-fieldsett'])}
       >
-        <label className={style['filter-label']} for="location">
+        <label className={style['filter-label']} htmlFor="location">
           Location
         </label>
         <div className={style['filter-input-wraper']}>
@@ -164,4 +158,4 @@ const VanFilter = () => {
   );
 };
 
-export default VanFilter;
+export default VanFilters;

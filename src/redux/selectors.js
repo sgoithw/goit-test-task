@@ -46,10 +46,6 @@ export const selectFilteredAds = createSelector(
 
     if (details.length > 0) {
       filteredAds = filteredAds.filter(ad => {
-        console.log(
-          Object.keys(ad.details),
-          Object.keys(ad.details).filter(key => ad.details[key])
-        );
         return details.every(detail =>
           Object.keys(ad.details)
             .filter(key => ad.details[key])

@@ -83,7 +83,7 @@ const CampersListItem = ({
           {Object.keys(details)
             .filter(key => details[key])
             .map(key => (
-              <CamperFeature slug={key} value={details[key]} />
+              <CamperFeature key={key} slug={key} value={details[key]} />
             ))}
         </ul>
         <Button className="camper-show-more" onClick={handleShowDetails}>
