@@ -13,7 +13,7 @@ function App() {
   const dipatch = useDispatch();
   useEffect(() => {
     dipatch(fetchAdverts());
-  }, []);
+  }, [dipatch]);
 
   return (
     <Routes>
