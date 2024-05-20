@@ -1,0 +1,39 @@
+.filter-list-item {
+  width: calc((100% - 8px * 2) / 3);
+  cursor: pointer;
+}
+
+.filter-checkbox-big {
+  width: 100%;
+  height: 95px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  mix-blend-mode: multiply;
+  border-radius: 10px;
+  border: solid 1px rgba(16, 24, 40, 0.2);
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+  &.active {
+    border-color: var(--button-red-hover);
+  }
+}
+
+.filter-checkbox-title {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--main-dark);
+}
+
+.filter-checkbox-big input[type='checkbox'],
+.filter-checkbox-big input[type='radio'] {
+  display: none;
+}

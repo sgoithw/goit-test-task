@@ -1,10 +1,67 @@
 import clsx from 'clsx';
 import style from './VanFilter.module.css';
 import Button from 'components/Button/Button';
+import FilterListBigCheckboxItem from 'components/FilterListBigCheckboxItem/FilterListBigCheckboxItem';
+import FilterListRadioButtonsList from 'components/FilterListRadioButtonsList/FilterListRadioButtonsList';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFilter } from './../../redux/filterSlice';
 
 const VanFilter = () => {
+  const dispatch = useDispatch();
+  const [location, setLocation] = useState('');
+  const [details, setDetails] = useState([]);
+  const [vanType, setVanType] = useState('panelTruck');
+  const [transmission, setTransmission] = useState('');
+
+  const handleChangeLocation = ({ target }) => {
+    setLocation(target.value);
+  };
+
+  const handleChangeEquipment = (name, value, checked) => {
+    const det = [...details];
+
+    switch (name) {
+      case 'details':
+        if (checked) {
+          if (!det.includes(value)) {
+            det.push(value);
+            setDetails(det);
+          }
+        } else {
+          setDetails(det.filter(e => e != value));
+        }
+        break;
+      case 'transmission':
+        setTransmission(checked ? value : '');
+        break;
+    }
+  };
+
+  const handleVanTypeChange = type => {
+    setVanType(type);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log({
+      location,
+      details,
+      transmission,
+      vanType,
+    });
+    dispatch(
+      setFilter({
+        location,
+        details,
+        transmission,
+        vanType,
+      })
+    );
+  };
+
   return (
-    <form className={style['filter']}>
+    <form onSubmit={handleSubmit} className={style['filter']}>
       <fieldset
         className={clsx(style['filter-fieldset'], style['location-fieldsett'])}
       >
@@ -16,11 +73,13 @@ const VanFilter = () => {
             <use href={process.env.PUBLIC_URL + '/icons.svg#map-pin'}></use>
           </svg>
           <input
+            onChange={handleChangeLocation}
             className={clsx(style['filter-input'], style['filter-input'])}
             type="text"
             id="location"
             name="location"
             placeholder="Kyiv, Ukraine"
+            value={location}
           />
         </div>
       </fieldset>
@@ -32,81 +91,41 @@ const VanFilter = () => {
           </legend>
           <hr />
           <ul className={style['filter-list']}>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="checkbox" name="equipment" value="AC" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#wind'}></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>AC</span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="checkbox" name="equipment" value="Automatic" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use
-                    href={process.env.PUBLIC_URL + '/icons.svg#multiroute'}
-                  ></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>
-                  Automatic
-                </span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="checkbox" name="equipment" value="Kitchen" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use
-                    href={process.env.PUBLIC_URL + '/icons.svg#fork-knife'}
-                  ></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>Kitchen</span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="checkbox" name="equipment" value="TV" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#tv'}></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>TV</span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="checkbox" name="equipment" value="Shower/WC" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use
-                    href={process.env.PUBLIC_URL + '/icons.svg#shower'}
-                  ></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>
-                  Shower/WC
-                </span>
-              </label>
-            </li>
+            <FilterListBigCheckboxItem
+              onChange={handleChangeEquipment}
+              icon={process.env.PUBLIC_URL + '/icons.svg#wind'}
+              name="details"
+              value="airConditioner"
+              title="AC"
+            />
+            <FilterListBigCheckboxItem
+              onChange={handleChangeEquipment}
+              icon={process.env.PUBLIC_URL + '/icons.svg#multiroute'}
+              name="transmission"
+              value="automatic"
+              title="Automatic"
+            />
+            <FilterListBigCheckboxItem
+              onChange={handleChangeEquipment}
+              icon={process.env.PUBLIC_URL + '/icons.svg#fork-knife'}
+              name="details"
+              value="kitchen"
+              title="Kitchen"
+            />
+            <FilterListBigCheckboxItem
+              onChange={handleChangeEquipment}
+              icon={process.env.PUBLIC_URL + '/icons.svg#tv'}
+              name="details"
+              value="TV"
+              title="TV"
+            />
+            <FilterListBigCheckboxItem
+              onChange={handleChangeEquipment}
+              icon={process.env.PUBLIC_URL + '/icons.svg#shower'}
+              name="details"
+              value="shower"
+              title="Shower/WC"
+            />
           </ul>
         </fieldset>
         <fieldset className={style['filter-fieldset']}>
@@ -114,51 +133,32 @@ const VanFilter = () => {
             Vehicle type
           </legend>
           <hr />
-          <ul className={style['filter-list']}>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="radio" name="type" value="Van" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#van-2'}></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>Van</span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="radio" name="type" value="Fully Integrated" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#van-1'}></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>
-                  Fully Integrated
-                </span>
-              </label>
-            </li>
-            <li className={style['filter-list-item']}>
-              <label className={style['filter-checkbox-big']}>
-                <input type="radio" name="type" value="Alcove" />
-                <svg
-                  className={style['filter-checkbox-icon']}
-                  width="32"
-                  height="32"
-                >
-                  <use href={process.env.PUBLIC_URL + '/icons.svg#van'}></use>
-                </svg>
-                <span className={style['filter-checkbox-title']}>Alcove</span>
-              </label>
-            </li>
-          </ul>
+          <FilterListRadioButtonsList
+            name="type"
+            value={vanType}
+            onChange={handleVanTypeChange}
+            variants={[
+              {
+                icon: process.env.PUBLIC_URL + '/icons.svg#van-2',
+                title: 'Van',
+                value: 'panelTruck',
+              },
+              {
+                icon: process.env.PUBLIC_URL + '/icons.svg#van-1',
+                title: 'Fully Integrated',
+                value: 'fullyIntegrated',
+              },
+              {
+                icon: process.env.PUBLIC_URL + '/icons.svg#van',
+                title: 'Alcove',
+                value: 'alcove',
+              },
+            ]}
+          />
         </fieldset>
-        <Button className={style['form-search-button']}>Search</Button>
+        <Button type="submit" className={style['form-search-button']}>
+          Search
+        </Button>
       </fieldset>
     </form>
   );

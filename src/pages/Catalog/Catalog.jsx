@@ -4,8 +4,22 @@ import VanFilter from 'components/VanFilter/VanFIlter';
 import CampersList from 'components/CampersList/CampersList';
 import Button from 'components/Button/Button';
 import CamperDetailsModal from 'components/CamperDetailsModal/CamperDetailsModal';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectFilterShowFirst,
+  selectFilteredAdsCount,
+} from './../../redux/selectors';
+import { setShowFirst } from './../../redux/filterSlice';
 
 const Catalog = () => {
+  const dispatch = useDispatch();
+  const foundCount = useSelector(selectFilteredAdsCount);
+  const showFirst = useSelector(selectFilterShowFirst);
+
+  const handleLoadMore = () => {
+    dispatch(setShowFirst(showFirst + 4));
+  };
+
   return (
     <>
       <Section
@@ -17,9 +31,15 @@ const Catalog = () => {
         </div>
         <div className={style['catalog']}>
           <CampersList />
-          <Button id="load-more" className={style['load-more']}>
-            Load more
-          </Button>
+          {foundCount > showFirst && (
+            <Button
+              onClick={handleLoadMore}
+              id="load-more"
+              className={style['load-more']}
+            >
+              Load more
+            </Button>
+          )}
         </div>
       </Section>
       <CamperDetailsModal />

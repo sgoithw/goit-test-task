@@ -6,11 +6,13 @@ import {
   selectAdvertsError,
   selectAdvertsLoading,
   selectFavoriteAds,
+  selectFilteredAds,
+  selectFilteredPaginatedAds,
 } from './../../redux/selectors';
 import Loader from 'components/Loader/Loader';
 
 const CampersList = ({ favorites = false }) => {
-  const ads = useSelector(selectAdverts);
+  const ads = useSelector(selectFilteredPaginatedAds);
   const favoriteAds = useSelector(selectFavoriteAds);
   const isLoading = useSelector(selectAdvertsLoading);
   const error = useSelector(selectAdvertsError);
