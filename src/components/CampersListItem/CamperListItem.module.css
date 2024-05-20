@@ -114,6 +114,11 @@
   color: var(--main-light-dark);
 }
 .camper-description p {
+  width: 524px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  clear: both;
 }
 
 .camper-feature-list {

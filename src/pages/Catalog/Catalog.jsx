@@ -33,6 +33,7 @@ const Catalog = () => {
           <CampersList />
           {foundCount > showFirst && (
             <Button
+              outline={true}
               onClick={handleLoadMore}
               id="load-more"
               className={style['load-more']}
