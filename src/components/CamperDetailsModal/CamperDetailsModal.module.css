@@ -145,10 +145,10 @@
   top: 3px;
   position: relative;
   cursor: pointer;
+}
 
-  &.active {
-    border-bottom: solid 5px var(--button-red);
-  }
+.modal-tab-nav-active {
+  border-bottom: solid 5px var(--button-red);
 }
 .modal-details {
   display: flex;
@@ -165,10 +165,8 @@
 .modal-tab-content {
   display: none;
 }
-.modal-tab-content {
-  &.active {
-    display: block;
-  }
+.modal-tab-content-active {
+  display: block;
 }
 .modal-camper-feature-list {
   margin-bottom: 44px;

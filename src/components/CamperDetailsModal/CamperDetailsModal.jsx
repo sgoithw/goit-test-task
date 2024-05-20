@@ -104,7 +104,7 @@ const CamperDetailsModal = () => {
           <li
             className={clsx(
               style['modal-tab-nav'],
-              activeTab === 'features' && style['active']
+              activeTab === 'features' && style['modal-tab-nav-active']
             )}
             onClick={() => setActiveTab('features')}
           >
@@ -113,7 +113,7 @@ const CamperDetailsModal = () => {
           <li
             className={clsx(
               style['modal-tab-nav'],
-              activeTab === 'reviews' && style['active']
+              activeTab === 'reviews' && style['modal-tab-nav-active']
             )}
             onClick={() => setActiveTab('reviews')}
           >
@@ -126,7 +126,7 @@ const CamperDetailsModal = () => {
               id="features"
               className={clsx(
                 style['modal-tab-content'],
-                activeTab === 'features' && style['active']
+                activeTab === 'features' && style['modal-tab-content-active']
               )}
             >
               <ul className={style['modal-camper-feature-list']}>
@@ -224,7 +224,7 @@ const CamperDetailsModal = () => {
               id="reviews"
               className={clsx(
                 style['modal-tab-content'],
-                activeTab === 'reviews' && style['active']
+                activeTab === 'reviews' && style['modal-tab-content-active']
               )}
             >
               <ReviewsList reviews={ad.reviews} />
