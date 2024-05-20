@@ -9,7 +9,7 @@ import {
   selectIsDetailsModalOpen,
 } from './../../redux/selectors';
 import { closeDetailsModal } from './../../redux/detailsModalSlice';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import CamperFeature from 'components/CamperFeature/CamperFeature';
 
 const CamperDetailsModal = () => {
@@ -19,18 +19,18 @@ const CamperDetailsModal = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('features');
 
-  const handleEsc = e => {
+  const handleEsc = useCallback(e => {
     if (e.key === 'Escape') {
       handleClose();
     }
-  };
+  });
 
   useEffect(() => {
     document.addEventListener('keydown', handleEsc);
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
-  }, []);
+  }, [handleEsc]);
 
   useEffect(() => {
     setActiveTab('features');
@@ -87,8 +87,8 @@ const CamperDetailsModal = () => {
         </div>
         <div className={style['modal-camper-gallery']}>
           <ul className={style['modal-camper-gallery-list']}>
-            {ad.gallery.slice(0, 3).map(image => (
-              <li className={style['modal-camper-gallery-item']}>
+            {ad.gallery.slice(0, 3).map((image, i) => (
+              <li key={i} className={style['modal-camper-gallery-item']}>
                 <img
                   className={style['modal-camper-gallery-img']}
                   src={image}
@@ -105,7 +105,7 @@ const CamperDetailsModal = () => {
           <li
             className={clsx(
               style['modal-tab-nav'],
-              activeTab == 'features' && style['active']
+              activeTab === 'features' && style['active']
             )}
             onClick={() => setActiveTab('features')}
           >
@@ -114,7 +114,7 @@ const CamperDetailsModal = () => {
           <li
             className={clsx(
               style['modal-tab-nav'],
-              activeTab == 'reviews' && style['active']
+              activeTab === 'reviews' && style['active']
             )}
             onClick={() => setActiveTab('reviews')}
           >
@@ -127,14 +127,18 @@ const CamperDetailsModal = () => {
               id="features"
               className={clsx(
                 style['modal-tab-content'],
-                activeTab == 'features' && style['active']
+                activeTab === 'features' && style['active']
               )}
             >
               <ul className={style['modal-camper-feature-list']}>
                 {Object.keys(ad.details)
                   .filter(key => ad.details[key])
                   .map(key => (
-                    <CamperFeature slug={key} value={ad.details[key]} />
+                    <CamperFeature
+                      key={key}
+                      slug={key}
+                      value={ad.details[key]}
+                    />
                   ))}
               </ul>
               <div className={style['camper-vehicle-details']}>
@@ -221,7 +225,7 @@ const CamperDetailsModal = () => {
               id="reviews"
               className={clsx(
                 style['modal-tab-content'],
-                activeTab == 'reviews' && style['active']
+                activeTab === 'reviews' && style['active']
               )}
             >
               <ReviewsList reviews={ad.reviews} />

@@ -35,6 +35,8 @@ const VanFilters = () => {
       case 'transmission':
         setTransmission(checked ? value : '');
         break;
+      default:
+        break;
     }
   };
 

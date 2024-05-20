@@ -67,8 +67,8 @@ const GalleryList = () => {
 
   return (
     <ul className={style['gallery-list']}>
-      {images.map(({ image, alt }) => (
-        <GalleryListItem image={image} alt={alt} />
+      {images.map(({ image, alt }, i) => (
+        <GalleryListItem key={i} image={image} alt={alt} />
       ))}
     </ul>
   );

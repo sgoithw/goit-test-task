@@ -2,11 +2,9 @@ import CampersListItem from 'components/CampersListItem/CampersListItem';
 import style from './CampersList.module.css';
 import { useSelector } from 'react-redux';
 import {
-  selectAdverts,
   selectAdvertsError,
   selectAdvertsLoading,
   selectFavoriteAds,
-  selectFilteredAds,
   selectFilteredPaginatedAds,
 } from './../../redux/selectors';
 import Loader from 'components/Loader/Loader';
@@ -24,7 +22,7 @@ const CampersList = ({ favorites = false }) => {
       {renderAds.map(ad => (
         <CampersListItem key={ad._id} {...ad} />
       ))}
-      {renderAds.length == 0 && <p>No campers found</p>}
+      {renderAds.length === 0 && <p>No campers found</p>}
     </ul>
   );
 };
