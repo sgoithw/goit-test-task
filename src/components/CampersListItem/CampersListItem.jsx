@@ -4,6 +4,7 @@ import { selectIsFavorite } from './../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from './../../redux/favoritesSlice';
 import { showDetailsModal } from './../../redux/detailsModalSlice';
+import CamperFeature from 'components/CamperFeature/CamperFeature';
 
 const CampersListItem = ({
   _id,
@@ -79,18 +80,11 @@ const CampersListItem = ({
           <p>{description}</p>
         </div>
         <ul className={style['camper-feature-list']}>
-          {Object.keys(details).map(key => (
-            <li key={key} className={style['camper-feture-item']}>
-              <svg width="20" height="20">
-                <use
-                  href={
-                    process.env.PUBLIC_URL + `/icons.svg#${key.toLowerCase()}`
-                  }
-                ></use>
-              </svg>
-              {details[key]} {key}
-            </li>
-          ))}
+          {Object.keys(details)
+            .filter(key => details[key])
+            .map(key => (
+              <CamperFeature slug={key} value={details[key]} />
+            ))}
         </ul>
         <Button className="camper-show-more" onClick={handleShowDetails}>
           Show more

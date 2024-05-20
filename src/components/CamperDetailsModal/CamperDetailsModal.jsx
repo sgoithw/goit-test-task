@@ -9,7 +9,8 @@ import {
   selectIsDetailsModalOpen,
 } from './../../redux/selectors';
 import { closeDetailsModal } from './../../redux/detailsModalSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import CamperFeature from 'components/CamperFeature/CamperFeature';
 
 const CamperDetailsModal = () => {
   const isOpen = useSelector(selectIsDetailsModalOpen);
@@ -18,8 +19,31 @@ const CamperDetailsModal = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('features');
 
+  const handleEsc = e => {
+    if (e.key === 'Escape') {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  useEffect(() => {
+    setActiveTab('features');
+  }, [id]);
+
   const handleClose = () => {
     dispatch(closeDetailsModal());
+  };
+
+  const handleModalClick = e => {
+    if (e.target.classList.contains(style['modal-holder'])) {
+      handleClose();
+    }
   };
 
   if (!isOpen) {
@@ -27,7 +51,7 @@ const CamperDetailsModal = () => {
   }
 
   return (
-    <div className={style['modal-holder']}>
+    <div className={style['modal-holder']} onClick={handleModalClick}>
       <div className={style['modal']}>
         <div className={style['modal-camper-header']}>
           <div className={style['modal-camper-header-top']}>
@@ -107,19 +131,11 @@ const CamperDetailsModal = () => {
               )}
             >
               <ul className={style['modal-camper-feature-list']}>
-                {Object.keys(ad.details).map(key => (
-                  <li className={style['camper-feture-item']}>
-                    <svg width="20" height="20">
-                      <use
-                        href={
-                          process.env.PUBLIC_URL +
-                          `/icons.svg#${key.toLowerCase()}`
-                        }
-                      ></use>
-                    </svg>
-                    {ad.details[key]} {key}
-                  </li>
-                ))}
+                {Object.keys(ad.details)
+                  .filter(key => ad.details[key])
+                  .map(key => (
+                    <CamperFeature slug={key} value={ad.details[key]} />
+                  ))}
               </ul>
               <div className={style['camper-vehicle-details']}>
                 <h3 className={style['camper-vehicle-details-title']}>

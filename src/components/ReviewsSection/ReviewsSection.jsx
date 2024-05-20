@@ -2,6 +2,7 @@ import styles from './ReviewsSection.module.css';
 import Section from '../Section/Section';
 import ReviewsList from '../ReviewsList/ReviewsList';
 import Button from 'components/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 const ReviewsSection = () => {
   const reviews = [
@@ -44,9 +45,11 @@ const ReviewsSection = () => {
       title="What our customers say"
     >
       <ReviewsList horizontal={true} reviews={reviews} />
-      <Button outline={true} className={styles['reviews-catalog-btn']}>
-        View catalog
-      </Button>
+      <NavLink to="/catalog">
+        <Button outline={true} className={styles['reviews-catalog-btn']}>
+          View catalog
+        </Button>
+      </NavLink>
     </Section>
   );
 };

@@ -1,6 +1,7 @@
 import Container from 'components/Container/Container';
 import style from './HeroSection.module.css';
 import Button from 'components/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -20,7 +21,9 @@ const HeroSection = () => {
             Choose the perfect camper for your next adventure from the largest
             selection of campervans in the world.
           </p>
-          <Button> View catalog</Button>
+          <NavLink to="/catalog">
+            <Button> View catalog</Button>
+          </NavLink>
         </div>
       </Container>
     </section>
