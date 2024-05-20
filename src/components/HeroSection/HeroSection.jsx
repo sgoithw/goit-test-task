@@ -9,7 +9,9 @@ const HeroSection = () => {
       id="hero"
       className={style['hero-section']}
       style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL + '/hero-bg.webp'})`,
+        background: `linear-gradient(90deg, rgb(255 255 255 / 59%), transparent,transparent,transparent), linear-gradient(270deg, rgb(255 255 255 / 59%), transparent,transparent,transparent), url('${process.env.PUBLIC_URL}/hero-bg.webp')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <Container>
